@@ -1,0 +1,36 @@
+Running time seems to scale with the square of the number of experiments: when you double N, time is x4.
+
+>> tic,t=300;binomialanal(floor(t/2*.309),floor(t/2*.238),floor(t)),toc
+
+ans =
+
+    0.1535
+
+
+elapsed_time =
+
+  1.0125e+003
+
+>> 1000/60
+
+ans =
+
+   16.6667
+
+>> tic,t=150;binomialanal(floor(t/2*.309),floor(t/2*.238),floor(t)),toc
+
+ans =
+
+    0.2957
+
+
+elapsed_time =
+
+  245.5530
+
+>> 1013/245
+
+ans =
+
+    4.1347
+
