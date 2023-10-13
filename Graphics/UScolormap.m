@@ -1,0 +1,86 @@
+function UScolormap(incomeScore,ageScore,uvScore,USERANK)
+% function UScolormap(stateRscore,stateGscore,stateBscore)
+% Plots a map of the US state using parameters for income, age, and UV that
+% are between 0 and 1
+% Inputs must be vectors of length 51 with data for states organized in
+% alphabetical order with District of Columbia last
+% USERANK=1 to use the rank (sort order) of each score, to fully utilize
+% the color scale
+% MM May 2020
+
+if nargin<4,
+    USERANK=1;
+end
+
+    stateRscore = incomeScore;
+    stateGscore = ageScore;
+    stateBscore = uvScore;
+        
+    if USERANK,
+        [b,i]=sort(stateRscore);
+        stateRscore=i;
+        [b,i]=sort(stateGscore);
+        stateGscore=i;
+        [b,i]=sort(stateBscore);
+        stateBscore=i;
+    end
+    
+    % Normalize: (color vector needs to be between zero and 1
+    stateRscore=stateRscore./max(stateRscore);
+    stateGscore=stateGscore./max(stateGscore);
+    stateBscore=stateBscore./max(stateBscore);
+    
+    if size(stateRscore,1)>1
+        stateRscore=stateRscore';
+    end   
+    if size(stateGscore,1)>1
+        stateGscore=stateGscore';
+    end   
+    if size(stateBscore,1)>1
+        stateBscore=stateBscore';
+    end  
+    
+    statecolor=[stateRscore;stateGscore;stateBscore];
+    
+    states = shaperead('usastatehi','UseGeoCoords',true);    
+    %Create a SymbolSpec to display Alaska and Hawaii as red polygons.  
+    
+    symbols = makesymbolspec('Polygon',{'Name','Alabama','FaceColor',statecolor(:,1)},{'Name','Alaska','FaceColor',statecolor(:,2)},...
+        {'Name','Arizona','FaceColor',statecolor(:,3)},{'Name','Arkansas','FaceColor',statecolor(:,4)},...
+        {'Name','California','FaceColor',statecolor(:,5)},{'Name','Colorado','FaceColor',statecolor(:,6)},...
+        {'Name','Connecticut','FaceColor',statecolor(:,7)},{'Name','Delaware','FaceColor',statecolor(:,8)},...
+        {'Name','Florida','FaceColor',statecolor(:,9)},{'Name','Georgia','FaceColor',statecolor(:,10)},...
+        {'Name','Hawaii','FaceColor',statecolor(:,11)},{'Name','Idaho','FaceColor',statecolor(:,12)},...
+        {'Name','Illinois','FaceColor',statecolor(:,13)},{'Name','Indiana','FaceColor',statecolor(:,14)},...
+        {'Name','Iowa','FaceColor',statecolor(:,15)},{'Name','Kansas','FaceColor',statecolor(:,16)},...
+        {'Name','Kentucky','FaceColor',statecolor(:,17)},{'Name','Louisiana','FaceColor',statecolor(:,18)},...
+        {'Name','Maine','FaceColor',statecolor(:,19)},{'Name','Maryland','FaceColor',statecolor(:,20)},...
+        {'Name','Massachusetts','FaceColor',statecolor(:,21)},{'Name','Michigan','FaceColor',statecolor(:,22)},...
+        {'Name','Minnesota','FaceColor',statecolor(:,23)},{'Name','Mississippi','FaceColor',statecolor(:,24)},...
+        {'Name','Missouri','FaceColor',statecolor(:,25)},{'Name','Montana','FaceColor',statecolor(:,26)},...
+        {'Name','Nebraska','FaceColor',statecolor(:,27)},{'Name','Nevada','FaceColor',statecolor(:,28)},...
+        {'Name','New Hampshire','FaceColor',statecolor(:,29)},{'Name','New Jersey','FaceColor',statecolor(:,30)},...
+        {'Name','New Mexico','FaceColor',statecolor(:,31)},{'Name','New York','FaceColor',statecolor(:,32)},...
+        {'Name','North Carolina','FaceColor',statecolor(:,33)},{'Name','North Dakota','FaceColor',statecolor(:,34)},...
+        {'Name','Ohio','FaceColor',statecolor(:,35)},{'Name','Oklahoma','FaceColor',statecolor(:,36)},...
+        {'Name','Oregon','FaceColor',statecolor(:,37)},{'Name','Pennsylvania','FaceColor',statecolor(:,38)},...
+        {'Name','Rhode Island','FaceColor',statecolor(:,39)},{'Name','South Carolina','FaceColor',statecolor(:,40)},...
+        {'Name','South Dakota','FaceColor',statecolor(:,41)},{'Name','Tennessee','FaceColor',statecolor(:,42)},...
+        {'Name','Texas','FaceColor',statecolor(:,43)},{'Name','Utah','FaceColor',statecolor(:,44)},...
+        {'Name','Vermont','FaceColor',statecolor(:,45)},{'Name','Virginia','FaceColor',statecolor(:,46)},...
+        {'Name','Washington','FaceColor',statecolor(:,47)},{'Name','West Virginia','FaceColor',statecolor(:,48)},...
+        {'Name','Wisconsin','FaceColor',statecolor(:,49)},{'Name','Wyoming','FaceColor',statecolor(:,50)},...
+        {'Name','District of Columbia','FaceColor',statecolor(:,51)}); 
+     
+    %Create a world map of North America with Alaska and Hawaii in red, and all other states in blue. 
+    
+    figure
+    worldmap('north america')
+    %colormap hot
+    geoshow(states,'SymbolSpec',symbols,'DefaultFaceColor',...
+        'white','DefaultEdgeColor','black')
+    axis off
+    %colorbar
+end
+
+
