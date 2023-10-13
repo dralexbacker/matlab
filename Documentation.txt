@@ -1,0 +1,17 @@
+General:
+
+arr2num		Yields a number whose digits are made out of the digits in the 1-D array numa
+array2cell	Converts an array with rows i:numsets:end representing set i to a cell{i}
+asc2bin		Converts all .MAT files in pwd from present format to binary
+avevar		[A, V] = AVEVAR(X) returns the average of X in A, and the variance in V.
+balmix		Balances even and odd indices of a sequence and shuffles it
+bareb		Bar graph with error bars
+barebg		Grouped bar graph with error bars
+barebs		Bar graph w/error bars & significance labels
+beep		Supposed to beep, but does not in Borges
+bigraph		Plots a figure with 2 graphs horizontally side by side, landscape, with title and subtitle
+bottitle	Makes a title at the bottom of the current figure
+cc_lag_time	Gives coeff of corr of the odd rows of matrix vs. the 
+ 		corresponding (consecutive) even rows, as a fn of lag and time
+cell2mat	Converts 1-dim celda of size nx1 into a 1-dim matrix of size(n,m) where m=max length of celda's elements
+cell2str	Converts 1-dim celda of strings size(1,n) to a string array size(n,m) where m=max length of all strings in celda
